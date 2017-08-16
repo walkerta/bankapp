@@ -1,32 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { selectUser }  from '../actions';
+import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux';
+import Link from 'react-router-dom';
+import { selectAccount } from '../actions/index';
 
 
-function mapStateToProps(state) {
-  return {
-    user: state.selectedUser,
-    account: state.selectedAccount
-  };
+class AccountDetail extends Component{
+  render (){
+    return(
+      <div>
+        something
+      </div>
+    )
+  }
 }
-
-
-function mapStateToProps(state) {
-  const userIdx = state.users.findIndex(user => user._id === state.selectedUser);
-  const accountIdx = state.users[userIdx].accounts.findIndex(account => account.id === state.selectedAccount);
-  return {
-    account: state.users[userIdx].accounts[accountIdx],
-    user: state.users[userIdx]
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        withdrawFunds: withdrawFunds
-    }, dispatch)
-}
-
-
-
-
-export default connect(mapStateToProps,  mapDispatchToProps)(UserDetail);

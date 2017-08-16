@@ -1,12 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
-
 
 export const USER_SELECTED = "USER_SELECTED";
 export const ACCOUNT_SELECTED = "ACCOUNT_SELECTED";
@@ -24,10 +15,10 @@ You will need to create a selectAccount
 action creator here, it will take a type, and
 payload: accountId
 ************************************/
-export function selectUser(userId) {
+export function selectAccount(accountId) {
   return {
     type: ACCOUNT_SELECTED,
-    payload: accountIds
+    payload: accountId
   };
 }
 export function withdrawFunds(amount) {

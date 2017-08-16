@@ -1,37 +1,43 @@
-import React, {component} from 'react';
+//react imports
+import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 
+//router imports
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-//import React Router
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+//redux imports
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers';
+
+//import styles
+import './styles/index.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 //component imports
-import Home from './Home';
-import BaseLayout from './BaseLayout';
-import BankShot from './BankShot';
-import Users from './Users';
+import App from './components/App';
+import BaseLayout from './components/BaseLayout';
+import UserList from './containers/UserList';
+import UserDetail from './containers/UserDetail';
+import AccountDetail from './components/AccountDetail';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+//create store for redux and apply middleware
+const createStoreWithMiddleware = applyMiddleware()(createStore);
+
+//wrap provider around router
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
+    <BrowserRouter>
+      <BaseLayout>
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route path="/users/:id/:accountID" component={AccountDetail} />
+        <Route path="/users/:id" component={UserDetail} />
+        <Route path="/users" component={UserList} />
+      </Switch>
+      </BaseLayout>
+    </BrowserRouter>
+  </Provider>
 
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <BaseLayout>
-          <Switch>
-            <Route exact path="/" component={BankShot} />
-            <Route path="/users/:id" component={Home} />
-            <Route path="/users" component={Users} />
-          </Switch>
-        </BaseLayout>
-      </BrowserRouter>
-    );
-  }
-}
-
-export default App;
+  , document.getElementById('root'));

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectUser, selectAccount }  from '../actions/index';
+//import { selectUser, selectAccount }  from '../actions/index';
 //make sure action created flows through all reducers
-import { bindActionCreators } from 'redux';
+//import { bindActionCreators } from 'redux';
 //import router Link
 import { Link } from 'react-router-dom';
 

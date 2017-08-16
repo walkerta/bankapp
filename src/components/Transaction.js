@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
-class ModalExample extends React.Component {
+export default class Example extends React.Component {
+//class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +29,28 @@ class ModalExample extends React.Component {
 
   render() {
     return (
+
+<Container>
+      <div>
+             <Navbar color="faded" light toggleable>
+               <NavbarToggler right onClick={this.toggle} />
+               <NavbarBrand href="/">reactstrap</NavbarBrand>
+               <Collapse isOpen={this.state.isOpen} navbar>
+                 <Nav className="ml-auto" navbar>
+                   <NavItem>
+                     <NavLink href="/components/">Components</NavLink>
+                   </NavItem>
+                   <NavItem>
+                     <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
+                   </NavItem>
+                 </Nav>
+               </Collapse>
+             </Navbar>
+           </div>
+         );
+       }
+     }
+
       <div>
         <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
@@ -50,8 +74,8 @@ class ModalExample extends React.Component {
           </ModalFooter>
         </Modal>
       </div>
+</Container>
+
     );
   }
 }
-
-export default ModalExample;

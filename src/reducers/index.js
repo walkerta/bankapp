@@ -1,3 +1,4 @@
+
 import {combineReducers} from 'redux';
 import {USER_SELECTED, ACCOUNT_SELECTED, WITHDRAW_FUNDS} from '../actions/index';
 import userList from '../data/users';
@@ -14,7 +15,7 @@ const reducer = function(state = initialState, action) {
         case USER_SELECTED:
             return update(state, {
                 selectedUser: {
-                    $set: action.payload
+                    $set: state.users.find(user => user._id === action.payload)
                 }
             });
         /*
@@ -23,25 +24,24 @@ const reducer = function(state = initialState, action) {
 
         */
 
+        case ACCOUNT_SELECTED:
+            return update(state, {
+                selectedUser: {
+                    $set: action.payload
+                }
+            });
 
 
-const reducer = function(state = initialState, action) {
-            switch (action.type) {
-                case ACCOUNT_SELECTED:
-                    return update(state, {
-                        selectedUser: {
-                            $set: action.accountIds
-                        }
-                    });
 
-
-                    
         case WITHDRAW_FUNDS:
             const userIdx = state.users.findIndex(user => user._id === state.selectedUser);
             const accountIdx = state.users[userIdx].accounts.findIndex(account => account.id === state.selectedAccount);
 
             return update(state, {
                 users: {
+
+
+
                     [userIdx]: {
                         accounts: {
                             [accountIdx]: {
